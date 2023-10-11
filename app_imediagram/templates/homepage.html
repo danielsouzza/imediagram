@@ -12,13 +12,13 @@
       <div class="w-full p-1 md:p-2 ">
         <div class=" p-4">
           <div class="bg-white border rounded-lg max-w-mx ">
-            <div class="flex items-center  px-4 py-3">
+            <a class="flex items-center  px-4 py-3" href="{{url_for("perfil",id_usuario=post[3])}}">
               <img class="h-8 w-8 rounded-full" src="{{ url_for('static', filename=post[2])}}"/>
               <div class="ml-3 ">
                 <span class="text-sm font-semibold antialiased block leading-tight"></span>
                 <span class="text-gray-600 text-xs block">{{post[1]}}</span>
               </div>
-            </div>
+            </a>
             <div class="rounded">
               <img class="rounded p-2" src="{{ url_for('static', filename=post[0])}}"/>
             </div>

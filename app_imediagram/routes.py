@@ -49,7 +49,7 @@ def register():
 @login_required
 def homepage():
     if current_user.id:
-        sql = text("select foto.imagem, usuario.username, usuario.foto_perfil from foto join usuario on usuario.id=foto.id_usuario order by foto.id desc ")
+        sql = text("select foto.imagem, usuario.username, usuario.foto_perfil, usuario.id from foto join usuario on usuario.id=foto.id_usuario order by foto.id desc ")
         results = database.session.execute(sql)
         posts = []
         for r in results:
@@ -91,24 +91,9 @@ def createPost():
 @app.route('/perfil/<id_usuario>', methods = [ "GET", "POST" ])
 @login_required
 def perfil( id_usuario ):
-
-    if int( id_usuario ) == int( current_user.id ):
-        formfoto = FormFoto()
-        fotos = Foto.query.filter_by(id_usuario=current_user.id).all()
-        if formfoto.validate_on_submit():
-            arquivo = formfoto.foto.data
-            caminho = os.path.join( app.config['UPLOAD_FOLDER'], arquivo )
-
-            arquivo.save( caminho )
-
-            foto = Foto( imagem = arquivo, id_usuario = current_user.id )
-            database.session.add( foto )
-            database.session.commit()
-
-        return render_template( "perfil.html", usuario = current_user, form = formfoto,fotos=fotos )
-    else:
-        usuario = Usuario.query.get( int( id_usuario ) )
-        return render_template( 'perfil.html', usuario = usuario, form = None, )
+    fotos = Foto.query.filter_by(id_usuario=id_usuario).all()
+    usuario = Usuario.query.get( int( id_usuario ) )
+    return render_template( 'perfil.html', usuario = usuario, form = None,fotos=fotos  )
     
     
     

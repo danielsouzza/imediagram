@@ -25,24 +25,20 @@
           <h2 class="text-3xl inline-block font-light md:mr-2 mb-2 sm:mb-0">
             {{usuario.username}}
           </h2>
-
-          <!-- badge -->
-          <span class="inline-block fas fa-certificate fa-lg text-blue-500 
-                               relative mr-6  text-xl transform -translate-y-2" aria-hidden="true">
-            <i class="fas fa-check text-white text-xs absolute inset-x-0
-                               ml-1 mt-px"></i>
-          </span>
         </div>
-        </div>
+      </div>
+      {% if usuario.id == current_user.id %}
+      <div class="inline-flex rounded shadow-sm">
+        <a href="{{url_for('createPost')}}" aria-current="page" class="px-4 py-2 text-sm font-medium text-blue-700 bg-white border border-gray-200 rounded-l-lg hover:bg-gray-100 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-blue-500 dark:focus:text-white">
+          New Post
+        </a>
+      </div>
+      {% endif %}
 
     </header>
 
     <!-- posts -->
     <div class="px-px md:px-3">
-
-      <!-- user following for mobile only -->
-      
-    
       <!-- insta freatures -->
       <ul class="flex items-center justify-around md:justify-center space-x-12  
                     uppercase tracking-widest font-semibold text-xs text-gray-600
