@@ -49,7 +49,7 @@ def register():
 @login_required
 def homepage():
     if current_user.id:
-        sql = text("select foto.imagem, usuario.username, usuario.foto_perfil from foto join usuario on usuario.id=foto.id_usuario")
+        sql = text("select foto.imagem, usuario.username, usuario.foto_perfil from foto join usuario on usuario.id=foto.id_usuario order by foto.id desc ")
         results = database.session.execute(sql)
         posts = []
         for r in results:
@@ -82,6 +82,7 @@ def createPost():
             foto = Foto( imagem = photo_name, id_usuario = current_user.id )
             database.session.add( foto )
             database.session.commit()
+            return redirect( url_for( "homepage" ) )
 
         return render_template( "create_post.html", form = formfoto )
     else:
